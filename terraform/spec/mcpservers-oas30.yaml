@@ -1,0 +1,180 @@
+openapi: "3.0.1"
+info:
+  title: "MCP Servers API"
+  version: "1.0.0"
+  description: "REST API for MCP servers"
+servers:
+  - url: "https://*.execute-api.${aws_region}.amazonaws.com/{basePath}"
+    variables:
+      basePath:
+        default: "/"
+
+paths:
+  /gov_uk_search:
+    post:
+      summary: "GOV.UK search MCP endpoint"
+      description: "JSON-RPC endpoint for GOV.UK search MCP server (handles initialize, tools/list, tools/call)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jsonrpc:
+                  type: string
+                  example: "2.0"
+                method:
+                  type: string
+                  example: "tools/list"
+                params:
+                  type: object
+                id:
+                  type: string
+      responses:
+        "200":
+          description: "JSON-RPC response (success or error)"
+          content:
+            application/json:
+              schema:
+                type: object
+        "204":
+          description: "No content (for notifications/initialized)"
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        httpMethod: POST
+        uri: arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_arns.gov_uk_search}/invocations
+    options:
+      summary: "CORS preflight for GOV.UK search"
+      responses:
+        "200":
+          description: "CORS headers"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        httpMethod: POST
+        uri: arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_arns.gov_uk_search}/invocations
+
+  /gov_uk_acronyms:
+    post:
+      summary: "GOV.UK acronyms MCP endpoint"
+      description: "JSON-RPC endpoint for GOV.UK acronyms MCP server (handles initialize, tools/list, tools/call)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jsonrpc:
+                  type: string
+                  example: "2.0"
+                method:
+                  type: string
+                  example: "tools/list"
+                params:
+                  type: object
+                id:
+                  type: string
+      responses:
+        "200":
+          description: "JSON-RPC response (success or error)"
+          content:
+            application/json:
+              schema:
+                type: object
+        "204":
+          description: "No content (for notifications/initialized)"
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        httpMethod: POST
+        uri: arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_arns.gov_uk_acronyms}/invocations
+    options:
+      summary: "CORS preflight for GOV.UK acronyms"
+      responses:
+        "200":
+          description: "CORS headers"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        httpMethod: POST
+        uri: arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_arns.gov_uk_acronyms}/invocations
+
+  /wikipedia:
+    post:
+      summary: "Wikipedia MCP endpoint"
+      description: "JSON-RPC endpoint for Wikipedia MCP server (handles initialize, tools/list, tools/call)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                jsonrpc:
+                  type: string
+                  example: "2.0"
+                method:
+                  type: string
+                  example: "tools/list"
+                params:
+                  type: object
+                id:
+                  type: string
+      responses:
+        "200":
+          description: "JSON-RPC response (success or error)"
+          content:
+            application/json:
+              schema:
+                type: object
+        "204":
+          description: "No content (for notifications/initialized)"
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        httpMethod: POST
+        uri: arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_arns.wikipedia}/invocations
+    options:
+      summary: "CORS preflight for Wikipedia"
+      responses:
+        "200":
+          description: "CORS headers"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        httpMethod: POST
+        uri: arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_arns.wikipedia}/invocations
+
+x-amazon-apigateway-minimum-compression-size: 0
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: false
+    validateRequestParameters: false
+x-amazon-apigateway-request-validator: all

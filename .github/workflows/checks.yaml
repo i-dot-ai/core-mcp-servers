@@ -1,0 +1,25 @@
+name: Check code
+
+on:
+  push:
+
+jobs:
+  check_web:
+    name: Check Python
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+
+    - name: Set up Python 3.12
+      run: uv python install 3.12
+
+    - name: Install log transformer dependencies
+      run: uv sync --all-extras --dev
+
+    - name: Run lint
+      run: make lint
