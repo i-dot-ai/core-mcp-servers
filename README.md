@@ -38,10 +38,11 @@ However, we would like to also enable JS lambdas in the future and have that as 
 To add a new server, the following steps need to be taken:
 
 1. Add another dir to `src/` with the name matching the mcp server and lambda you want to deploy
-2. Add your code into `tools.py` inside the `src/<your_lambda_name>/code/` dir
+2. Add your code into `main.py` inside the `src/<your_lambda_name>/code/` dir
+   1. Use on of the existing lambdas as an example
 3. Add required packages into `requirements.txt` inside the `src/<your_lambda_name>/code/` dir
 4. Add the deployment and lint steps to the `Makefile` inside the `src/<your_lambda_name>/` dir
-5. Add your lambda information to `terraform/api_gateway.tf` `local.mcp_servers` variable
+5. Add your lambda information to `terraform/spec/mcpservers-oas30.yaml` file (copy one of the existing ones and just change the references)
 6. Add your lambda config as a module call to `terraform/lambdas.tf` file
 7. Update the list of MCP servers to build in the root `Makefile`, in `build_artifacts/ci` and `lint` commands
 
@@ -58,10 +59,11 @@ and `export env=<env>`+`make tf_apply` to deploy.
 
 ## Security
 
-The api gateway is publicly available on the internet from a network perspective, and has a single layer defence setup. 
+The api gateway is publicly available on the internet from a network perspective, and has a two layer defence setup. 
 
 1. The domain access policy is configured to block all traffic except from known Cabinet Office/DSIT IP addresses.
-   2. As this is currently aimed to host tools that are stateless, and use public sources or produce public information,
+   1. As this is currently aimed to host tools that are stateless, and use public sources or produce public information,
    blocking that requires more than this is too restrictive for the time being
+   2. Accessing the MCP requires you to know the value of the WAF header token
 
-The intention is to eventually place this behind a keycloak instance (or another auth service) if and when the hosted tools demand it.
+The intention is to eventually place this behind an auth mechanism of some kind that matches the MCP spec, if and when the hosted tools demand it.
