@@ -24,37 +24,41 @@ locals {
 }
 
 module "gov_uk_search" {
-  source = "./modules/mcp-server-lambda"
-  source_name = "gov_uk_search"
+  source        = "./modules/mcp-server-lambda"
+  source_name   = "gov_uk_search"
   function_name = "${local.name}-gov-uk-search"
-  runtime = "python3.12"
-  account_id = data.aws_caller_identity.current.account_id
-  entrypoint = "main.lambda_handler"
+  runtime       = "python3.12"
+  account_id    = data.aws_caller_identity.current.account_id
+  entrypoint    = "main.lambda_handler"
+  name          = local.name
 }
 
 module "gov_uk_acronyms" {
-  source = "./modules/mcp-server-lambda"
-  source_name = "gov_uk_acronyms"
+  source        = "./modules/mcp-server-lambda"
+  source_name   = "gov_uk_acronyms"
   function_name = "${local.name}-gov-uk-acronyms"
-  runtime = "python3.12"
-  account_id = data.aws_caller_identity.current.account_id
-  entrypoint = "main.lambda_handler"
+  runtime       = "python3.12"
+  account_id    = data.aws_caller_identity.current.account_id
+  entrypoint    = "main.lambda_handler"
+  name          = local.name
 }
 
 module "wikipedia" {
-  source = "./modules/mcp-server-lambda"
-  source_name = "wikipedia"
+  source        = "./modules/mcp-server-lambda"
+  source_name   = "wikipedia"
   function_name = "${local.name}-wikipedia"
-  runtime = "python3.12"
-  account_id = data.aws_caller_identity.current.account_id
-  entrypoint = "main.lambda_handler"
+  runtime       = "python3.12"
+  account_id    = data.aws_caller_identity.current.account_id
+  entrypoint    = "main.lambda_handler"
+  name          = local.name
 }
 
 module "defra_environment_api" {
-  source = "./modules/mcp-server-lambda"
-  source_name = "defra_environment_api"
+  source        = "./modules/mcp-server-lambda"
+  source_name   = "defra_environment_api"
   function_name = "${local.name}-defra-environment-api"
-  runtime = "python3.12"
-  account_id = data.aws_caller_identity.current.account_id
-  entrypoint = "main.lambda_handler"
+  runtime       = "python3.12"
+  account_id    = data.aws_caller_identity.current.account_id
+  entrypoint    = "main.lambda_handler"
+  name          = local.name
 }

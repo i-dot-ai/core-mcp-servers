@@ -29,3 +29,8 @@ variable "memory_size" {
   description = "The memory to allocate to the lambda"
   default     = 128
 }
+
+variable "name" {
+  type        = string
+  description = "The application name"
+}

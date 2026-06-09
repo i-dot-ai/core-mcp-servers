@@ -23,14 +23,15 @@ resource "aws_lambda_layer_version" "mcp_dependencies" {
 module "mcp" {
   source = "git::https://github.com/i-dot-ai/i-dot-ai-core-terraform-modules.git//modules/infrastructure/lambda?ref=v2.1.0-lambda"
   # source = "../../../../i-dot-ai-core-terraform-modules//modules/infrastructure/lambda"  # For testing local changes
-  function_name = var.function_name
-  account_id    = var.account_id
+  function_name             = var.function_name
+  account_id                = var.account_id
+  runtime                   = var.runtime
+  package_type              = "Zip"
+  handler                   = var.entrypoint
+  file_path                 = data.archive_file.mcp.output_path
+  source_code_hash          = data.archive_file.mcp.output_base64sha256
+  permissions_boundary_name = "arn:aws:iam::${var.account_id}:policy/infra/${var.name}-perms-boundary-app"
 
-  runtime          = var.runtime
-  package_type     = "Zip"
-  handler          = var.entrypoint
-  file_path        = data.archive_file.mcp.output_path
-  source_code_hash = data.archive_file.mcp.output_base64sha256
   layers = [aws_lambda_layer_version.mcp_dependencies.arn]
 
   timeout     = 60
