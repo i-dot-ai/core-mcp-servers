@@ -5,6 +5,7 @@ lint:
 	make lint/callable build_target=gov_uk_search
 	make lint/callable build_target=gov_uk_acronyms
 	make lint/callable build_target=wikipedia
+	make lint/callable build_target=defra_environment_api
 
 lint/callable:
 	cd src/${build_target}/ && make lint
@@ -14,6 +15,7 @@ build_artifacts/ci:
 	make build/callable build_target=gov_uk_search
 	make build/callable build_target=gov_uk_acronyms
 	make build/callable build_target=wikipedia
+	make build/callable build_target=defra_environment_api
 
 build_artifacts/local:
 	docker run --rm -v "${PWD}:/var/task" -w /var/task --platform linux/amd64 python:3.12 \

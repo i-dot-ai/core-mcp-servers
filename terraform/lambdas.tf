@@ -14,6 +14,11 @@ locals {
       function_name = module.wikipedia.name
       invoke_arn    = module.wikipedia.invokation_arn
       arn           = module.wikipedia.arn
+    },
+    "defra_environment_api" = {
+      function_name = module.defra_environment_api.name
+      invoke_arn    = module.defra_environment_api.invokation_arn
+      arn           = module.defra_environment_api.arn
     }
   }
 }
@@ -40,6 +45,15 @@ module "wikipedia" {
   source = "./modules/mcp-server-lambda"
   source_name = "wikipedia"
   function_name = "${local.name}-wikipedia"
+  runtime = "python3.12"
+  account_id = data.aws_caller_identity.current.account_id
+  entrypoint = "main.lambda_handler"
+}
+
+module "defra_environment_api" {
+  source = "./modules/mcp-server-lambda"
+  source_name = "defra_environment_api"
+  function_name = "${local.name}-defra-environment-api"
   runtime = "python3.12"
   account_id = data.aws_caller_identity.current.account_id
   entrypoint = "main.lambda_handler"

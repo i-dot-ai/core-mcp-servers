@@ -25,6 +25,62 @@ An MCP for searching the [Gov UK search API](https://github.com/alphagov/search-
 
 This provides an up-to-date reference for LLMs to work with when specifically querying for content on [gov.uk](https://gov.uk).
 
+#### Wikipedia MCP Server
+
+An MCP server for searching Wikipedia and retrieving article content and summaries.
+
+Provides tools to search for pages, get full page content, and summarize topics from Wikipedia.
+
+#### DEFRA Environment API MCP Server
+
+An MCP server for accessing the [DEFRA Environment Agency Public Register](https://environment.data.gov.uk/public-register).
+
+This server provides comprehensive access to UK environmental data across 11 registries with 22 tools:
+
+**General Registry Tools:**
+- `search_across_registries` - Search across all registries
+- `simple_name_search` - Simple name/number search
+
+**Waste Operations:**
+- `search_waste_operations` - Search waste operations registry
+- `search_for_waste_operation` - Get specific waste operation by ID
+
+**End of Life Vehicles:**
+- `search_end_of_life_vehicles` - Search vehicle facilities registry
+- `search_for_end_of_life_vehicle` - Get specific facility by ID
+
+**Enforcement Actions:**
+- `search_enforcement_action` - Search enforcement actions registry
+- `search_for_enforcement_action` - Get specific enforcement action by ID
+
+**Flood Risk Activity Exemptions:**
+- `search_flood_risk_exemptions` - Search flood risk exemptions registry
+- `search_for_flood_risk_exemption` - Get specific exemption by ID
+
+**Industrial Installations:**
+- `search_industrial_installations` - Search industrial installations registry
+- `search_for_industrial_installation` - Get specific installation by ID
+
+**Radioactive Substance Permits:**
+- `search_radioactive_substance` - Search radioactive substance permits registry
+- `search_for_radioactive_substance` - Get specific permit by ID
+
+**Scrap Metal Dealers:**
+- `search_scrap_metal_dealers` - Search scrap metal dealers registry
+- `search_for_scrap_metal_dealer` - Get specific dealer by ID
+
+**Waste Exemptions:**
+- `search_waste_exemptions` - Search waste exemptions registry
+- `search_for_waste_exemption` - Get specific exemption by ID
+
+**Waste Carriers and Brokers:**
+- `search_waste_carriers_brokers` - Search waste carriers/brokers registry
+- `search_for_waste_carrier_broker` - Get specific carrier/broker by ID
+
+**Water Discharges:**
+- `search_water_discharges` - Search water discharge consents registry
+- `search_for_water_discharge` - Get specific consent by ID
+
 ### Adding a new MCP server
 
 > [!WARNING]  
