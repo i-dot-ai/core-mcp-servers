@@ -30,7 +30,7 @@ module "mcp" {
   handler                   = var.entrypoint
   file_path                 = data.archive_file.mcp.output_path
   source_code_hash          = data.archive_file.mcp.output_base64sha256
-  permissions_boundary_name = "arn:aws:iam::${var.account_id}:policy/infra/${var.name}-perms-boundary-app"
+  permissions_boundary_name = "infra/${var.name}-perms-boundary-app"
 
   layers = [aws_lambda_layer_version.mcp_dependencies.arn]
 
