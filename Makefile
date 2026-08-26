@@ -10,16 +10,12 @@ lint:
 lint/callable:
 	cd src/${build_target}/ && make lint
 
-build_artifacts/ci:
+build_artifacts:
 	mkdir -p -- build out build/layers build/packages
 	make build/callable build_target=gov_uk_search
 	make build/callable build_target=gov_uk_acronyms
 	make build/callable build_target=wikipedia
 	make build/callable build_target=defra_environment_api
-
-build_artifacts/local:
-	docker run --rm -v "${PWD}:/var/task" -w /var/task --platform linux/amd64 python:3.12 \
-		sh -c "pip install uv && make build_artifacts/ci"
 
 build/callable:
 	cd src/${build_target}/ && make build

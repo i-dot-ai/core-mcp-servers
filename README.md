@@ -100,7 +100,7 @@ To add a new server, the following steps need to be taken:
 4. Add the deployment and lint steps to the `Makefile` inside the `src/<your_lambda_name>/` dir
 5. Add your lambda information to `terraform/spec/mcpservers-oas30.yaml` file (copy one of the existing ones and just change the references)
 6. Add your lambda config as a module call to `terraform/lambdas.tf` file
-7. Update the list of MCP servers to build in the root `Makefile`, in `build_artifacts/ci` and `lint` commands
+7. Update the list of MCP servers to build in the root `Makefile`, in `build_artifacts` and `lint` commands
 
 > [!TIP]
 > There are examples in the above terraform files for the terraform steps. And `src/gov_uk_acronyms/` for the python part.
@@ -110,7 +110,7 @@ To add a new server, the following steps need to be taken:
 
 Deployments will happen automatically when merging to `main` for `prod` or when creating a manual `release` for `dev`.
 
-To deploy manually using terraform, run `make build_artifacts/ci` to create the build scripts, 
+To deploy manually using terraform, run `make build_artifacts` to create the build scripts, 
 and `export env=<env>`+`make tf_apply` to deploy.
 
 ## Security
